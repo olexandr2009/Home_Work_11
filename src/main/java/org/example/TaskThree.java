@@ -10,17 +10,12 @@ public class TaskThree {
     }
     //Task3
     public static void printNumbers(String[] numbers){
-        if (numbers==null){
-            return;
-        }
-        String e = Arrays.stream(numbers)
-                .flatMap(str -> Arrays.stream(str.split(", ")))
-                .map(s ->{
-                    Integer.parseInt(s);
-                    return s;
-                })
+        System.out.println(Arrays.stream(numbers)
+                .flatMap(s -> Arrays.stream(s.split(",\\s*")))
+                .map(String::trim)
+                .map(Integer::parseInt)
                 .sorted()
-                .collect(Collectors.joining(", ","\"","\""));
-        System.out.println(e);
+                .map(String::valueOf)
+                .collect(Collectors.joining(", ")));
     }
 }

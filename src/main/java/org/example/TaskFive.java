@@ -1,6 +1,6 @@
 package org.example;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -10,7 +10,15 @@ public class TaskFive {
         System.out.println(list);
     }
     public static <T> Stream<T> zip(Stream<T> first, Stream<T> second){
-        return Stream.of(first,second)
-                .flatMap(tStream -> tStream);
+        List<T> list = new ArrayList<>();
+        Iterator<T> firstI = first.iterator();
+        Iterator<T> secondI = second.iterator();
+
+        while (firstI.hasNext() && secondI.hasNext()){
+            list.add(firstI.next());
+            list.add(secondI.next());
+        }
+        Collections.shuffle(list);
+        return list.stream();
     }
 }
